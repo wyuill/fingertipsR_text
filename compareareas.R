@@ -1,10 +1,6 @@
 library(pacman)
 p_load(fingertipsR, dplyr, stringr)
 
-# Fetch data
-data1 <- fingertips_data(inds, AreaTypeID = 102)
-data2 <- fingertips_data(inds, AreaCode = district, AreaTypeID = 101, ParentAreaTypeID = 102)
-
 comparetoareas <- function(df, from_area, to_areas) {
   
   # Extract data for area to compre from and areas to compare to
