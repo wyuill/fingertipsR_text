@@ -1,13 +1,6 @@
 library(pacman)
 p_load(fingertipsR, dplyr, stringr)
 
-# Set parameters examples
-p_area <- "E10000015"
-inds <- c(90366, 108)
-c_areas <- nearest_neighbours(p_area, 102, "CIPFA")
-district <- c("E07000095","E07000096","E07000098","E07000099","E07000102","E07000103","E07000240",
-              "E07000241","E07000242","E07000243")
-
 # Fetch data
 data1 <- fingertips_data(inds, AreaTypeID = 102)
 data2 <- fingertips_data(inds, AreaCode = district, AreaTypeID = 101, ParentAreaTypeID = 102)
@@ -38,7 +31,7 @@ comparetoareas <- function(df, from_area, to_areas) {
   from_data$UpperCI95.0limit)
   
   from_data$Comparatordifferences_lower <- mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category,
-                                                            f_Timeperiod, f_LCI){
+                                                           f_Timeperiod, f_LCI){
     differences = to_data %>%
       filter(IndicatorID == f_IndicatorID &
                Sex == f_Sex &
@@ -48,7 +41,7 @@ comparetoareas <- function(df, from_area, to_areas) {
                (if (is.na(f_Category)) {
                  is.na(Category)
                } else {Category == f_Category
-                 })) %>%
+               })) %>%
       select(AreaName) %>%
       unlist() %>%
       paste(collapse = ", ") %>%
