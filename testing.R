@@ -1,3 +1,6 @@
+library(pacman)
+p_load(fingertipsR, dplyr, stringr)
+
 # Set parameters examples
 p_area <- "E10000015"
 inds <- c(90366, 108)
@@ -7,4 +10,11 @@ district <- c("E07000095","E07000096","E07000098","E07000099","E07000102","E0700
 
 # Fetch data
 data1 <- fingertips_data(inds, AreaTypeID = 102)
-data2 <- fingertips_data(inds, AreaCode = district, AreaTypeID = 101, ParentAreaTypeID = 102)
+#data2 <- fingertips_data(inds, AreaCode = district, AreaTypeID = 101, ParentAreaTypeID = 102)
+
+t <- comparetoareas(data1, p_area, c_areas, "CIPFA")
+
+colname = "CIPFA"
+
+colhigher <- paste(c(colname, "_higher"), collapse="")
+print(colhigher)

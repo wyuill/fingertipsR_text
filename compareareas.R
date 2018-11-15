@@ -1,13 +1,10 @@
-library(pacman)
-p_load(fingertipsR, dplyr, stringr)
-
-comparetoareas <- function(df, from_area, to_areas) {
+comparetoareas <- function(df, from_area, to_areas, colname) {
   
   # Extract data for area to compre from and areas to compare to
   from_data = df[df$AreaCode == from_area, ]
   to_data = df[df$AreaCode %in% to_areas, ]
   
-  from_data$Comparatordifferences_higher <- mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category,
+  from_data[, paste(c(colname, "_higher"), collapse="")] <- mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category,
                                                             f_Timeperiod, f_UCI){
     differences = to_data %>%
       filter(IndicatorID == f_IndicatorID &
@@ -26,7 +23,7 @@ comparetoareas <- function(df, from_area, to_areas) {
   }, from_data$IndicatorID, from_data$Sex, from_data$Age, from_data$Category, from_data$Timeperiod,
   from_data$UpperCI95.0limit)
   
-  from_data$Comparatordifferences_lower <- mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category,
+  from_data[, paste(c(colname, "_lower"), collapse="")] <- mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category,
                                                            f_Timeperiod, f_LCI){
     differences = to_data %>%
       filter(IndicatorID == f_IndicatorID &
