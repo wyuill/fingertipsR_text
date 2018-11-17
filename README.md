@@ -1,2 +1,2 @@
 # fingertipsR_text
-Generate text analysis from PHE fingertips
+Generate text analysis from fingertipsR package
