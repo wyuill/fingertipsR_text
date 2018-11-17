@@ -14,7 +14,9 @@ data1 <- fingertips_data(inds, AreaTypeID = 102)
 
 t <- comparetoareas(data1, p_area, c_areas, "CIPFA")
 
-colname = "CIPFA"
-
-colhigher <- paste(c(colname, "_higher"), collapse="")
-print(colhigher)
+# Need to add:
+# Create sentence for compare areas
+# Error handeling
+# How to calc sig
+# Names of or number of areas
+# Create sentence for goal/trend
