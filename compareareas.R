@@ -32,7 +32,7 @@
 #' comparetoarea(data, "E10000015", nearest_neighbours(p_area, 102, "CIPFA"), "CIPFA")
 #' 
 
-comparetoareas <- function(df, from_area, to_areas, colname) {
+comparetoareas <- function(df, from_area, to_areas, colname = "compared_areas") {
   
   if (!is.data.frame(df)) {
     warning("df must be a dataframe")
