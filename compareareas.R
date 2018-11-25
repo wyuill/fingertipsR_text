@@ -38,8 +38,9 @@ comparetoareas <- function(df, from_area, to_areas, colname) {
     warning("df must be a dataframe")
   }
   
-  requiredcols <- c("IndicatorID", "Sex", "Age", "Category", "Timeperiod", "UpperCI95.0limit")
-  if (!length(intersect(requiredcols, colnames(data1)))) {
+  requiredcols <- c("IndicatorID", "Sex", "Age", "Category", "Timeperiod",
+                    "LowerCI95.0limit","UpperCI95.0limit")
+  if (!all(requiredcols %in% colnames(df))) {
     warning("one or more required columns are not in the df" )
   }
   

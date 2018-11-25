@@ -12,7 +12,10 @@ district <- c("E07000095","E07000096","E07000098","E07000099","E07000102","E0700
 data1 <- fingertips_data(inds, AreaTypeID = 102)
 #data2 <- fingertips_data(inds, AreaCode = district, AreaTypeID = 101, ParentAreaTypeID = 102)
 
+tesmp <- data1[1]
+
 t <- comparetoareas(data1, p_area, c_areas, "CIPFA")
+y <- comparetoareas(data1, tesmp, tesmp)
 
 # Need to add:
 # Create sentence for compare areas
@@ -20,3 +23,4 @@ t <- comparetoareas(data1, p_area, c_areas, "CIPFA")
 # How to calc sig
 # Names of or number of areas
 # Create sentence for goal/trend
+# Markdown
