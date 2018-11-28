@@ -10,13 +10,14 @@ district <- c("E07000095","E07000096","E07000098","E07000099","E07000102","E0700
 
 # Fetch data
 data1 <- fingertips_data(inds, AreaTypeID = 102)
+metadata1 <- indicator_metadata(inds)
 #data2 <- fingertips_data(inds, AreaCode = district, AreaTypeID = 101, ParentAreaTypeID = 102)
 
 test <- comparetoareas(data1, p_area, c_areas, "CIPFA")
 
-test1 <- textanalysis(test)
+test$analysis <- apply(test, 1, textanalysis)
 
-test1[1]
+test1
 
 # Need to add:
 # Create sentence for compare areas
