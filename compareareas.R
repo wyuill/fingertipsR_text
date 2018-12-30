@@ -29,7 +29,7 @@
 #'
 #' @examples
 #' comparetoarea(data, "E10000015", c("E07000095","E07000096", "E07000098"), "LTLA")
-#' comparetoarea(data, "E10000015", nearest_neighbours(p_area, 102, "CIPFA"), "CIPFA")
+#' comparetoarea(data, "E10000015", nearest_neighbours("E10000015", 102, "CIPFA"))
 #' 
 
 comparetoareas <- function(df, from_area, to_areas, colname = "compared_areas") {

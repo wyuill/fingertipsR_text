@@ -36,12 +36,11 @@ textanalysis <- function(data, trend = TRUE, country = TRUE,
   region_txt <- if (region == FALSE) {""} else {
     if (is.na(data['ComparedtoRegionvalueorpercentiles'])) {""} else {
     paste0("This is statistically ", tolower(data['ComparedtoRegionvalueorpercentiles']), " to the Region. ")
-  } }
+  } }s
   
   comp_txt <- 1
   
   sentence_list <- unlist(paste0(value_txt, trend_txt, goal_txt, country_txt, region_txt, comp_txt))
   
-  #result <- cbind(data, sentence_list)
 }
 
