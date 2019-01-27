@@ -1,9 +1,6 @@
 #' Compare an area to others areas for statistically signficant differences
 #'
-#' \code{comparetoareas} returns the supplied dataframe filtered to the compared
-#' from area, with additional columns containing the names of areas that are
-#' signficantly lower and higher. Data and columns should map to the fingertipsR
-#' layout
+#' \code{comparetoareas} returns the supplied dataframe filtered to the compared from area, with additional columns containing the names of areas that are signficantly lower and higher. Data and columns should map to the fingertipsR layout
 #'
 #' This function takes a dataframe containing data on the areas to be compared.
 #' This dataframe is filtered into a dataframe of the area to compare from
@@ -17,7 +14,7 @@
 #' comparisons create two columns, one for significantly higher values and one
 #' for signficantly lower values.
 #'
-#' @param df A dataframe with columns matching those produced by the fingertipsR
+#' @param df A dataframe with columns matching those produced by fingertipsR
 #'   package
 #' @param from_area The area code to be compared from (e.g. a Local Authority)
 #' @param to_areas The areas codes to be compared to (e.g. similar areas)
@@ -28,7 +25,7 @@
 #'   '_lower'), prefexed by colname.
 #'
 #' @examples
-#' comparetoarea(data, "E10000015", c("E07000095","E07000096", "E07000098"), "LTLA")
+#' comparetoarea(data, "E10000015", c("E07000095","E07000096", "E07000098"), LTLA")
 #' comparetoarea(data, "E10000015", nearest_neighbours("E10000015", 102, "CIPFA"))
 #' 
 
@@ -53,8 +50,9 @@ comparetoareas <- function(df, from_area, to_areas, colname = "compared_areas") 
   } else {to_data = df[df$AreaCode %in% to_areas, ]}
 
   from_data[, paste(c(colname, "_higher"), collapse="")] <- 
-    mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category, f_Timeperiod, f_UCI){
-      differences = to_data %>%
+    mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category, f_Timeperiod,
+                    f_UCI){
+      areas = to_data %>%
         filter(IndicatorID == f_IndicatorID &
                  Sex == f_Sex &
                  Age == f_Age &
@@ -67,12 +65,14 @@ comparetoareas <- function(df, from_area, to_areas, colname = "compared_areas") 
         select(AreaName) %>%
         unlist() %>%
         paste(collapse = ", ") %>%
-        str_replace(",(?!.*?,)", " and")
+        paste0(str_count(., "\\S+"), " areas (", ., ")") %>%
+        str_replace(., ",(?!.*?,)", " and")
   }, from_data$IndicatorID, from_data$Sex, from_data$Age, from_data$Category,
   from_data$Timeperiod, from_data$UpperCI95.0limit)
   
   from_data[, paste(c(colname, "_lower"), collapse="")] <-
-    mapply(function(f_IndicatorID,f_Sex, f_Age, f_Category,f_Timeperiod, f_LCI){
+      mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category, f_Timeperiod,
+                      f_LCI){
       differences = to_data %>%
         filter(IndicatorID == f_IndicatorID &
                  Sex == f_Sex &
@@ -86,7 +86,8 @@ comparetoareas <- function(df, from_area, to_areas, colname = "compared_areas") 
         select(AreaName) %>%
         unlist() %>%
         paste(collapse = ", ") %>%
-        str_replace(",(?!.*?,)", " and")
+        paste0(str_count(., "\\S+"), " area(s) (", ., ")") %>%
+        str_replace(., ",(?!.*?,)", " and")
   }, from_data$IndicatorID, from_data$Sex, from_data$Age, from_data$Category,
   from_data$Timeperiod, from_data$LowerCI95.0limit)  
   

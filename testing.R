@@ -15,14 +15,14 @@ metadata1 <- indicator_metadata(inds)
 
 test <- comparetoareas(data1, p_area, c_areas, "CIPFA")
 
-test$analysis <- apply(test, 1, textanalysis)
+test1=test[1,]
 
-test1
-
+test$analysis <- apply(test, 1, textanalysis, custom_areas = TRUE)
+test$analysis[1]
 # Need to add:
-# Create sentence for compare areas
+# metadata
+# Compare multiple area areas/flexible column
 # Error handeling
 # How to calc sig
 # Names of or number of areas
-# Create sentence for goal/trend
 # Markdown
