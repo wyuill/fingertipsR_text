@@ -52,7 +52,7 @@ comparetoareas <- function(df, from_area, to_areas, colname = "compared_areas") 
   from_data[, paste(c(colname, "_higher"), collapse="")] <- 
     mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category, f_Timeperiod,
                     f_UCI){
-      areas = to_data %>%
+      to_data %>%
         filter(IndicatorID == f_IndicatorID &
                  Sex == f_Sex &
                  Age == f_Age &
@@ -73,7 +73,7 @@ comparetoareas <- function(df, from_area, to_areas, colname = "compared_areas") 
   from_data[, paste(c(colname, "_lower"), collapse="")] <-
       mapply(function(f_IndicatorID, f_Sex, f_Age, f_Category, f_Timeperiod,
                       f_LCI){
-      differences = to_data %>%
+      to_data %>%
         filter(IndicatorID == f_IndicatorID &
                  Sex == f_Sex &
                  Age == f_Age &

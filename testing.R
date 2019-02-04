@@ -1,5 +1,5 @@
 library(pacman)
-p_load(fingertipsR, dplyr, stringr)
+p_load(fingertipsR, dplyr, stringr, tidyr)
 
 # Set parameters examples
 p_area <- "E10000015"
@@ -17,12 +17,17 @@ test <- comparetoareas(data1, p_area, c_areas, "CIPFA")
 
 test1=test[1,]
 
-test$analysis <- apply(test, 1, textanalysis, custom_areas = TRUE)
+test$analysis <- apply(test, 1, textanalysis, metadata = metadata1, custom_areas = TRUE)
 test$analysis[1]
+
+
+valueunit <- metadata1 %>%
+              filter(metadata1['IndicatorID'] == "108") %>%
+              select('Value type', 'Unit') %>%
+              unite(valueunit, c('Unit', 'Value type'), remove = TRUE)
+
 # Need to add:
-# metadata
 # Compare multiple area areas/flexible column
 # Error handeling
 # How to calc sig
 # Names of or number of areas
-# Markdown
