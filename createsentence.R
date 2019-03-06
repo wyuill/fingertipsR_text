@@ -7,7 +7,7 @@
 #   count(_HIGHER) (_HIGHER) and statistically significantly POLARITY then
 #   count(_LOWER) (_LOWER)
 #        **REPEAT LAST AS MANY TIMES AS SPECIFIED WITH DIFFERENT AREAS**
-# Definitions: 95% CI Compare area lists 
+# Definitions: 95% CI Compare area lists
 
 # Ideas: order of sentences, add category, add values of other areas (e.g. England)
 
