@@ -20,12 +20,6 @@ test1=test[1,]
 test$analysis <- apply(test, 1, textanalysis, metadata = metadata1, custom_areas = TRUE)
 test$analysis[1]
 
-
-valueunit <- metadata1 %>%
-              filter(metadata1['IndicatorID'] == "108") %>%
-              select('Value type', 'Unit') %>%
-              unite(valueunit, c('Unit', 'Value type'), remove = TRUE)
-
 # Need to add:
 # Compare multiple area areas/flexible column
 # Error handeling
