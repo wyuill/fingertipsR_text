@@ -13,7 +13,6 @@
 
 textanalysis <- function(data, metadata, trend = TRUE, goal = TRUE,
                          compare = TRUE, compare_cols = c(
-<<<<<<< HEAD
                              'ComparedtoEnglandvalueorpercentiles',
                              'ComparedtoRegionvalueorpercentiles',
                              'ComparedtoCCGvalueorpercentiles'),
@@ -22,16 +21,6 @@ textanalysis <- function(data, metadata, trend = TRUE, goal = TRUE,
   # get the value and unit for the indicator
   valueunit <- metadata %>%
     filter(metadata['IndicatorID'] == data['IndicatorID']) %>%
-=======
-                            'ComparedtoEnglandvalueorpercentiles',
-                            'ComparedtoRegionvalueorpercentiles',
-                            'ComparedtoCCGvalueorpercentiles'),
-                         custom_areas = FALSE) {
-  
-  # get the value and unit for the indicator
-  valueunit <- metadata1 %>%
-    filter(metadata1[['IndicatorID']] == test1[['IndicatorID']]) %>%
->>>>>>> 4ad0edce231f3afd8ea701fda0a7328315908abf
     select('Value type', 'Unit') %>%
     unite(valueunit, c('Value type', 'Unit'), remove=TRUE, sep=" ") %>%
     tolower()
@@ -64,7 +53,6 @@ textanalysis <- function(data, metadata, trend = TRUE, goal = TRUE,
   }})}
   
   # generate text in relation to custom areas (e.g. CIPFA), if applicable
-<<<<<<< HEAD
   #cus_compare_txt <- if (custom_areas == FALSE) {""} else {
   #  if (is.na(data['CIPFA_higher']) & is.na(data['CIPFA_lower'])) {""} else {
   #   paste(data['CIPFA_higher'], "are statistically signficantly higher than",   #           data['AreaName'], "while", data['CIPFA_lower'],
@@ -73,16 +61,4 @@ textanalysis <- function(data, metadata, trend = TRUE, goal = TRUE,
   
   # combines all setences together
   sentence_list <- unlist(paste0(valueunit))
-=======
-  cus_compare_txt <- if (custom_areas == FALSE) {""} else {
-    if (is.na(data['CIPFA_higher']) & is.na(data['CIPFA_lower'])) {""} else {
-      paste(data['CIPFA_higher'], "are statistically signficantly higher than",
-           data['AreaName'], "while", data['CIPFA_lower'],
-           "are statistically signficantly lower.")
-  }  }
-  
-  # combines all setences together
-  sentence_list <- unlist(paste0(value_txt, trend_txt, goal_txt, compare_txt,
-                                cus_compare_txt))
->>>>>>> 4ad0edce231f3afd8ea701fda0a7328315908abf
 }
